@@ -2,6 +2,7 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import datetime
 import os
+import json
 
 def step1():
     scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
@@ -9,7 +10,8 @@ def step1():
     #credentials =  ServiceAccountCredentials.from_json_keyfile_name(file_name, scope)
 
     credentials_dict = os.environ['CREDENTIALS_DICT']
-    credentials =  ServiceAccountCredentials.from_json_keyfile_dict(credentials_dict, scope)
+    cred_dict = json.loads(credentials_dict, strict=False)
+    credentials =  ServiceAccountCredentials.from_json_keyfile_dict(cred_dict, scope)
 
     gc = gspread.authorize(credentials)
     wks = gc.open('test2').sheet1
