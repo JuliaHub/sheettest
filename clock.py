@@ -7,7 +7,7 @@ def my_job():
 
 sched = BlockingScheduler()
 
-@sched.scheduled_job('interval', minutes=2)
+@sched.scheduled_job('interval', minutes=120)
 def timed_job():
     my_job()
 
